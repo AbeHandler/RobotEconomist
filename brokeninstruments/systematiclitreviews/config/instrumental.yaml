@@ -1,0 +1,15 @@
+sources:
+  - European Journal of Information Systems
+  - Information Systems Journal
+  - Information Systems Research
+  - Journal of the Association for Information Systems
+  - Journal of Information Technology
+  - Journal of Management Information Systems
+  - Journal of Strategic Information Systems
+  - MIS Quarterly
+query:
+  - instrumental varaible
+range:
+  min_year: 2015
+  max_year: 2020
+whitelist: config/naveen.whitelist.txt

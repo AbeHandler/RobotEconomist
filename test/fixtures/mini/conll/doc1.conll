@@ -1,0 +1,16 @@
+We	O
+use	O
+weather	IV-B
+as	O
+an	O
+instrument	O
+for	O
+mood	X-B
+.	O
+
+We	O
+regress	O
+mood	X-B
+onto	O
+income	Y-B
+.	O

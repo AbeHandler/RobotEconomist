@@ -1,0 +1,8 @@
+reports/*
+logs/*
+data/*
+tmp/*
+.vscode/*
+test/fixtures/tiny_pipeline/*
+test/fixtures/oracle_rain/*
+*__pycache__*

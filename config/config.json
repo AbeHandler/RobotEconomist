@@ -1,0 +1,11 @@
+{
+    "vertexes": {
+            "instrument": "IV",
+            "outcome": "Y",
+            "regressor": "X"
+    },
+    "edges":{
+        "instruments_label": "Instruments",
+        "affects_label": "Affects"
+    }
+}

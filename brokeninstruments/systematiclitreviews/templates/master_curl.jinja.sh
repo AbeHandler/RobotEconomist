@@ -1,0 +1,20 @@
+curl 'https://discovery.ebsco.com/api/v4/search' -o "output/"{{source | replace(" ", "_")}}.{{year}} \
+  -H 'authority: discovery.ebsco.com' \
+  -H 'accept: application/json, text/plain, */*' \
+  -H 'accept-language: en;q=0.9, en-US;q=0.8, en;q=0.7' \
+  -H 'content-type: application/json' \
+  -H 'cookie: locale=en; osano_consentmanager_uuid=88ec293d-f308-4326-8a1c-9478d40d9f38; osano_consentmanager=Ehw4ANz8lxbS-hMqacR26o8jUevLViO9BWa-pKVHGczKll8mVCfqrrDTSVxh2aGYwDLhjabuKh4me8Zj6WMdH4EYTQEd3wkPXg5Lc0hV-8w-CzR4fpdMTzDPuEQ_y7i6jDG8Xya6w2w4BCQMN4alyXnZRYfubU04O4Dqzr2XfDF6LmtBVJ0dSBWwPoZHUd4ub4EtRYaIOMmCoF5jcc2JNMOf5ueWQ_w96_pm4MuoHRdNlag7p7MXdCc2c-AFEIvb_aiyB81S1FZ8RIDEf2LefLvsYPrnQfYYJljwbA==; amp_cookie_test7QCkUsOHO0lewULn50H23w=1659978564919; amp_e1ea5d_discovery.ebsco.com=a143362c-27fb-490a-8101-f078d75ecb14...1g9v6th9o.1g9v8jbag.1a.0.1a; amplitude_id_f2f868b44e8b87ebaad5a7fc43b35fd1ebsco.com=eyJkZXZpY2VJZCI6ImJkNjljZWE4LThmMDItNGJlYy1iYzYyLTE1MWM5NWVlYmY0MVIiLCJ1c2VySWQiOm51bGwsIm9wdE91dCI6ZmFsc2UsInNlc3Npb25JZCI6MTY2MzAxNTcyOTkwOSwibGFzdEV2ZW50VGltZSI6MTY2MzAxNTcyOTkxMSwiZXZlbnRJZCI6OCwiaWRlbnRpZnlJZCI6Niwic2VxdWVuY2VOdW1iZXIiOjE0fQ==; SESSION_ID=NzJiOWVkYWYtNTAzOC00NDFlLWI4NWUtYjUzNDk1ZmJkMTUx; SESSION_EXPIRATION=1663268543; affiliation=eyJjdXN0b21lciI6InM4ODYwMzM4IiwiZ3JvdXAiOiJtYWluIn0=; LTIUserType=undefined; lux_uid=166319654643942309; amp_e1ea5d=device_id-TODO..1.1gcv3qh61.1gcv3qvfd.0.0.0; amp_e1ea5d_ebsco.com=7ea520ee-5892-4db4-a63b-82be0babff10...1gcv3qh69.1gcv3qvfr.f4.i.fm' \
+  -H 'dnt: 1' \
+  -H 'origin: https://discovery.ebsco.com' \
+  -H 'sec-ch-ua: "Google Chrome";v="105", "Not)A;Brand";v="8", "Chromium";v="105"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "macOS"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36' \
+  -H 'x-current-cgp: eyJjdXN0b21lciI6InM4ODYwMzM4IiwiZ3JvdXAiOiJtYWluIiwicHJvZmlsZSI6ImVkcyJ9' \
+  -H 'x-initiated-by: refresh' \
+  -H 'x-profile-id: eds' \
+  --data-binary '{"query":"{{query}}","queryModel":null,"autoCorrect":true,"profileIdentifier":"3czfwv","expanders":["concept"],"filters":{"databases":null,"minDate":"{{year}}-01","maxDate":"{{year}}-12","publicationIds":[],"peerReviewed":false,"atLibrary":false,"fullText":false,"facets":[]},"offset":0,"count":100,"searchMode":"all","highlightTag":"mark"}' \
+  --compressed

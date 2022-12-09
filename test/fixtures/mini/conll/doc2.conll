@@ -1,0 +1,17 @@
+We	O
+use	O
+weather	IV-B
+as	O
+an	O
+instrument	O
+for	O
+voting	X-B
+.	O
+
+We	O
+measure	O
+how	O
+voting	X-B
+affects	O
+income	Y-B
+.	O

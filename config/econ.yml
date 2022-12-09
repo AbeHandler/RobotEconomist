@@ -1,0 +1,24 @@
+name: econ
+channels:
+  - conda-forge
+dependencies:
+  - conda-forge::autopep8=1.7.0
+  - conda-forge::build=0.7.0
+  - conda-forge::flake8=5.0.4
+  - pip:
+      - naveen==0.3.1
+      - sqlitedict==2.0.0
+      # - typer[all]==0.6.1 suspected dead code Oct 19, 2022
+  - conda-forge::jinja2=3.0.3
+  - conda-forge::jupyter=1.0.0
+  - conda-forge::mypy=0.971
+  - conda-forge::networkx=2.7.1
+  - conda-forge::numpy=1.23.2
+  - conda-forge::python=3.10.6
+  - conda-forge::pytest=7.1.2
+  - conda-forge::scikit-learn=1.1.2
+  - conda-forge::spacy=3.4.1
+  - conda-forge::tqdm=4.64.1
+  - conda-forge::twine=4.0.1
+  - conda-forge::typer=0.4.2
+prefix: /home/ubuntu/anaconda3

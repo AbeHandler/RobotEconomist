@@ -1,0 +1,11 @@
+sources:
+  - Marketing Science
+  - Journal of Marketing
+  - Journal of Marketing Research
+query:
+  - hedonic
+  - utilitarian
+range:
+  min_year: 2000
+  max_year: 2022
+whitelist: config/hedonic_whitelist.txt
