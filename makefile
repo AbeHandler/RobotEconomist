@@ -64,6 +64,9 @@ data/doccano/abstracts.doccano.jsonl:
 lint:
 	./scripts/my_linter.sh
 
+scrapers/mnsc.urls.txt:
+	cd scrapers && ./get_informs_paper_urls.sh mnsc 70
+
 
 ### Build stuff
 
