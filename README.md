@@ -23,3 +23,7 @@ There is an `config/econ.yml` file with all of the conda information in it
 `brew install git-lfs`
 
 `brew install jq`
+
+## Repo tour 
+
+`scrapers` stores code to get NBER abstracts (also Management Science?)
