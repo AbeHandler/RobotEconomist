@@ -5,8 +5,9 @@ dependencies:
   - conda-forge::autopep8=1.7.0
   - conda-forge::build=0.7.0
   - conda-forge::flake8=5.0.4
+  - pip
   - pip:
-      - naveen==0.3.1
+      - naveen==0.3.7
       - sqlitedict==2.0.0
       # - typer[all]==0.6.1 suspected dead code Oct 19, 2022
   - conda-forge::jinja2=3.0.3
