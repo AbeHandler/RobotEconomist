@@ -11,5 +11,6 @@
 
 module load gnu_parallel
 source /curc/sw/anaconda3/latest
+conda env remove -n econ
 conda env create -f config/econ.yml
 
