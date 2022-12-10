@@ -11,6 +11,5 @@
 
 module load gnu_parallel
 source /curc/sw/anaconda3/latest
-conda activate az
 conda env create -f config/econ.yml
 
