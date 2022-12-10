@@ -14,3 +14,6 @@ while read p; do
     echo $p
     echo $p |  stream -d 10  | pluck -a class -e div -v abstractSection >> $INFORMS_CODE.abstracts.jsonl
 done < $INFORMS_CODE.urls.txt
+
+
+python informs_abstracts_post_processor.py $INFORMS_CODE
