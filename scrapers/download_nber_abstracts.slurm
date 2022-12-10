@@ -14,3 +14,5 @@ source /curc/sw/anaconda3/latest
 conda activate econ
 cd /scratch/alpine/abha4861/RobotEconomist/scrapers
 
+python nber_abstract_downloader.py
+
