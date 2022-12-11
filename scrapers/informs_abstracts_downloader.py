@@ -18,14 +18,15 @@ def get_abstract(url):
 if __name__ == "__main__":
     informs_journal_code = sys.argv[1]  # e.g. mnsc
     with open(f"{informs_journal_code}.urls.txt", "r") as inf:
-        with open(f"{informs_journal_code}.abstracts.jsonl", "w") as of:
-            for urlno, url in tqdm(enumerate(inf)):
-                url = url.replace("\n", "")
+        urls = [i.replace("\n"), for i in inf]
+    with open(f"{informs_journal_code}.abstracts.jsonl", "w") as of:
+        for urlno, url in tqdm(enumerate(urls), total=len(urls)):
+            url = url.replace("\n", "")
 
-                try:
-                    abstract = get_abstract(url)
-                except:
-                    abstract = "failure"
-                out = {"mnsc_id": url.split("/").pop(), "abstract": abstract}
+            try:
+                abstract = get_abstract(url)
+            except:
+                abstract = "failure"
+            out = {"mnsc_id": url.split("/").pop(), "abstract": abstract}
 
-                of.write(json.dumps(out) + "\n")
+            of.write(json.dumps(out) + "\n")
