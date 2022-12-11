@@ -17,4 +17,4 @@ cd /scratch/alpine/abha4861/RobotEconomist/scrapers
 rm *jsonl
 python nber_abstract_downloader.py
 python process_nber.py
-
+python process_abstracts_to_sentences.py -code nber
