@@ -18,7 +18,7 @@ def get_abstract(url):
 if __name__ == "__main__":
     informs_journal_code = sys.argv[1]  # e.g. mnsc
     with open(f"{informs_journal_code}.urls.txt", "r") as inf:
-        urls = [i.replace("\n"), for i in inf]
+        urls = [i.replace("\n", "") for i in inf]
     with open(f"{informs_journal_code}.abstracts.jsonl", "w") as of:
         for urlno, url in tqdm(enumerate(urls), total=len(urls)):
             url = url.replace("\n", "")
