@@ -14,4 +14,4 @@ source /curc/sw/anaconda3/latest
 conda activate econ
 cd /scratch/alpine/abha4861/RobotEconomist/scrapers
 
-./download_informs_abstracts.sh mnsc
+python informs_abstracts_downloader.py mnsc
