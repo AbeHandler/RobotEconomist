@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #SBATCH --partition=amilan
-#SBATCH --job-name=codes
-#SBATCH --output=codes.out
+#SBATCH --job-name=proc_nber
+#SBATCH --output=nber.process.out
 #SBATCH --time=24:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks=1    # note this can't be too big or you will overrun your storage when decompressing
