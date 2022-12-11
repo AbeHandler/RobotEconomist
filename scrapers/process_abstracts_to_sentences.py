@@ -36,13 +36,14 @@ if __name__ == "__main__":
     nlp = English()  # just the language with no pipeline
     nlp.add_pipe("sentencizer")
     sentence_id = 0
-    outfile = f"{args.ucode}.sentences.jsonl"
+    outfile = f"{args.code}.sentences.jsonl"
     with open(outfile, "w") as of:
         for dno, jsonline in enumerate(docs):
             doc = nlp(jsonline["abstract"])
             for sent in doc.sents:
                 sentence_id += 1
-                out = {"id": sentence_id, "sent": str(sent), f"{code}_paper_id": jsonline[f"{code}_paper_id"]}
+                out = {"id": sentence_id, "sent": str(
+                    sent), f"{code}_paper_id": jsonline[f"{code}_paper_id"]}
                 of.write(json.dumps(out) + '\n')
 
     print(f"[*] wrote {sentence_id} sentences to {outfile}")
