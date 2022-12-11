@@ -12,7 +12,7 @@ echo $INFORMS_CODE.jsonl
 
 while read p; do 
     echo $p
-    echo $p |  stream -d 20  | pluck -a class -e div -v abstractSection >> $INFORMS_CODE.abstracts.jsonl
+    echo $p |  stream -d 80  | pluck -a class -e div -v abstractSection >> $INFORMS_CODE.abstracts.jsonl
     wc -l $INFORMS_CODE.abstracts.jsonl
 done < $INFORMS_CODE.urls.txt
 
