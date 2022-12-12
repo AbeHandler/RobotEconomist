@@ -43,7 +43,7 @@ if __name__ == "__main__":
             for sent in doc.sents:
                 sentence_id += 1
                 out = {"id": sentence_id, "sent": str(
-                    sent), f"{code}_paper_id": jsonline[f"{code}_paper_id"]}
+                    sent), f"{args.code}_paper_id": jsonline[f"{args.code}_paper_id"]}
                 of.write(json.dumps(out) + '\n')
 
     print(f"[*] wrote {sentence_id} sentences to {outfile}")
