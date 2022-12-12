@@ -15,3 +15,4 @@ conda activate econ
 cd /scratch/alpine/abha4861/RobotEconomist/scrapers
 
 python informs_abstracts_downloader.py mnsc
+gzip mnsc.abstracts.jsonl
