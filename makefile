@@ -64,8 +64,22 @@ data/doccano/abstracts.doccano.jsonl:
 lint:
 	./scripts/my_linter.sh
 
+
+
+scrapers/nber.abstracts.jsonl.gz: 
+	cd scrapers && sbatch download_and_process_nber.slurm
+
+scrapers/mnsc.abstracts.jsonl.gz: geturls
+	cd scrapers && sbatch download_and_process_mnsc_url.slurm
+
+geturls: scrapers/mnsc.urls.txt scrapers/isre.urls.txt
+	echo "done"
+
 scrapers/mnsc.urls.txt:
 	cd scrapers && ./get_informs_paper_urls.sh mnsc 70
+
+scrapers/isre.urls.txt:
+	cd scrapers && ./get_informs_paper_urls.sh isre 33
 
 
 ### Build stuff
