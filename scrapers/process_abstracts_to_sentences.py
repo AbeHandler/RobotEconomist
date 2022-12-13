@@ -1,4 +1,5 @@
 import spacy
+import gzip
 import json
 import argparse
 
@@ -12,11 +13,12 @@ def get_docs(code: str):
     out = []
     errors = 0
     count = 0
-    with open(f"{code}.abstracts.jsonl", "r") as inf:
+    with gzip.open(f"{code}.abstracts.jsonl.gz", "rb") as inf:
         for ino, i in enumerate(inf):
             count += 1
-            i = i.replace("\n", "")
             try:
+                i = i.decode("utf-8", errors='ignore')
+                i = i.replace("\n", "")
                 i = json.loads(i)
                 out.append(i)
             except JSONDecodeError:
@@ -42,8 +44,9 @@ if __name__ == "__main__":
             doc = nlp(jsonline["abstract"])
             for sent in doc.sents:
                 sentence_id += 1
-                out = {"id": sentence_id, "sent": str(
-                    sent), f"{args.code}_paper_id": jsonline[f"{args.code}_paper_id"]}
+                out = {"id": sentence_id,
+                       "sent": str(sent),
+                       f"{args.code}_paper_id": jsonline[f"{args.code}_paper_id"]}
                 of.write(json.dumps(out) + '\n')
 
     print(f"[*] wrote {sentence_id} sentences to {outfile}")

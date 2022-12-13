@@ -27,6 +27,7 @@ if __name__ == "__main__":
                 abstract = get_abstract(url)
             except:
                 abstract = "failure"
-            out = {"mnsc_id": url.split("/").pop(), "abstract": abstract}
+            out = {f"{informs_journal_code}_id": url.split(
+                "/").pop(), "abstract": abstract}
 
             of.write(json.dumps(out) + "\n")
