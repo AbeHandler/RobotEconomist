@@ -18,3 +18,4 @@ rm -rf nber.*.jsonl
 python nber_abstract_downloader.py
 python process_abstracts_to_sentences.py -code nber
 gzip nber.abstracts.jsonl
+gzip nber.sentences.jsonl

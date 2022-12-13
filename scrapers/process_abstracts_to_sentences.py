@@ -1,6 +1,7 @@
 import spacy
 import gzip
 import json
+import os
 import argparse
 
 from typing import List
@@ -49,4 +50,5 @@ if __name__ == "__main__":
                        f"{args.code}_paper_id": jsonline[f"{args.code}_paper_id"]}
                 of.write(json.dumps(out) + '\n')
 
-    print(f"[*] wrote {sentence_id} sentences to {outfile}")
+    print(f"[*] wrote {sentence_id} sentences to {outfile}, gzipping")
+    os.system(f"gzip {outfile}")
