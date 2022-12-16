@@ -1,0 +1,8 @@
+increase
+decrease
+cause
+affect
+increases
+decreases
+causes
+affects
