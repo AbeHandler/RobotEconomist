@@ -4,6 +4,10 @@
 
 `python -m src.main --instrument=income --outcome=education`
 
+## Processing s2orc
+
+s2orc is processed in the data repo on Alpine. See `data/s2orc/process_full_dataset.slurm` for details. This gets data ready for the pipeline.
+
 ## Adding a new corpus
 
 - Add `jsonl` file in `json` directory with list of dictionaries containing and ID and text OR write txt files into the `txt` directory, typically to `f"data/{corpus}/txt"` 
