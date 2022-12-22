@@ -1,19 +1,15 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[109]:
-
 
 import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
 import pandas as pd
+from pandas import DataFrame
 from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_val_score
-
-
-# In[110]:
 
 
 def normalize_features(X_train, X_test):
@@ -25,111 +21,78 @@ def normalize_features(X_train, X_test):
     return X_train_norm, X_test_norm
 
 
-# In[111]:
+def load_seeds(filename="seeds.txt"):
+    seeds = []
+    with open(filename, "r") as s: #load seed words
+        for seed in s:
+            seed_word = seed.strip()
+            seeds.append(seed_word)
+    return seeds
 
+def load_text_file_as_list(filename: str):
+    lines = []
+    with open(filename, "r") as f: #load text
+        for line in f:
+            text = line.replace("\n", "")
+            lines.append(text)
+    return lines 
 
-#load concatenated yes and no data in csv format
+def load_text_file_as_list_of_dictionaries(filename: str = "causal_text.csv"):
+    out = []
+    for text in load_text_file_as_list(filename=filename):
+        out.append({"text": text})
+    return out
 
-lines = []
-seeds = []
-label = []
-with open("seeds.txt", "r") as s: #load seed words
-    for seed in s:
-        seed_word = seed.strip()
-        seeds.append(seed_word)
+def load_data(text_filename:str = "causal_text.csv",
+              seeds_filename: str = "seeds.txt") -> DataFrame:  
 
-with open("causal_text.csv", "r") as f: #load text
-    for line in f:
-        text = line
-        lines.append({"text": text})
+    seeds = load_seeds(seeds_filename)
+    lines = load_text_file_as_list_of_dictionaries(text_filename)
+                
+    df = pd.DataFrame(lines)
+
+    label = []
+    for row in df['text']:
+        if any(word in row for word in seeds): #assign labels based on seed words
+            label.append(1)
+        else:
+            label.append(0)
             
-df = pd.DataFrame(lines)
+    df["labels"] = label
 
-for row in df['text']:
-    if any(word in row for word in seeds): #assign labels based on seed words
-        label.append(1)
-    else:
-        label.append(0)
-        
-df["labels"] = label
+    return df
+
+df = load_data()
 
 #split into input and label data for training
-
 X = df.text
 y = df.labels
 
-df.head()
-
-
-# In[112]:
-
-
 vectorizer = CountVectorizer()
-X = vectorizer.fit_transform(X) #create bag of words
-
-X_train, X_test, y_train, y_test = train_test_split(X, y) #split data for testing 
-
-#X_train_norm, X_test_norm = normalize_features(X_train, X_test)
-
-
-# In[113]:
-
-
-#summary of words in data
-
-feature_names = vectorizer.get_feature_names()
-print("Number of features: {}".format(len(feature_names)))
-print("Last 15 Features: {}".format(feature_names[(2857-15):2857]))
-#vectorizer.vocabulary_
-
-
-# In[114]:
-
-
-#performance metrics 
+X = vectorizer.fit_transform(X) # create bag of words
 
 LogReg = LogisticRegression()
-LogReg.fit(X_train, y_train)
+LogReg.fit(X, y)
 
-CV_scores = cross_val_score(LogReg, X_train, y_train, cv = 5)
-print("Cross Validation Mean Score: {}".format(np.mean(CV_scores)))
-
-print("Training Score: {}".format(LogReg.score(X_train, y_train)))
-print("Testing Score: {}".format(LogReg.score(X_test, y_test)))
-
-
-# In[115]:
+# examine coefficients
+coef = LogReg.coef_[0]
+feats = vectorizer.get_feature_names_out()
+l = pd.DataFrame([{"coef": c, "feat": f} for c, f in zip(coef, feats)])
+l.sort_values("coef", ascending=False)[0:200]
 
 
-#confusion matrix for false negatives and positives
+runtime = pd.DataFrame(load_text_file_as_list_of_dictionaries('all_data.txt'))
+X_run = vectorizer.transform(runtime["text"])
+runtime["prob"] = LogReg.predict_proba(X_run)[:,1]
+runtime = runtime.sort_values("prob", ascending=False)
+runtime = runtime.to_dict(orient='records')
 
-y_pred = LogReg.predict(X_test)
-confusion = confusion_matrix(y_test, y_pred)
+yesses = load_text_file_as_list("yes.txt")
+nos = load_text_file_as_list("no.txt")
 
-print("Confusion Matrix: {}".format(confusion))
-
-
-# In[116]:
-
-
-#Examine predicted probabilities vs class labels
-
-probabilities = LogReg.predict_proba(X_test)
-
-probabilities = np.delete(probabilities, 0, axis=1)
-
-y_prob = []
-for i in range(probabilities.shape[0]):
-    y_prob.append(np.around(probabilities[i],2))
-    
-y_prob = np.array(y_prob).ravel()
-
-MSE = np.mean((np.array(y_test) - np.array(y_prob))**2)
-print("Mean Squared Error: {}".format(MSE))
-
-
-# In[ ]:
-
-
-
-
+# limiting to short sentences seems to really help a lot in annotating these
+# also the shorter sentences contain fewer anaphora and so are better in our setting
+runtime = [i for i in runtime if i["text"] not in yess and i["text"] not in nos and len(i["text"].split()) < 50]
+runtime = pd.DataFrame(runtime)
+runtime = runtime[0:100]
+runtime.to_csv("tmp.csv")
