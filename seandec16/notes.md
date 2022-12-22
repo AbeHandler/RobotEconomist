@@ -18,3 +18,4 @@ Then we extract the cause X and effect Y in a new annotation step.
 - Write the shortest sentence possible
 - Also of the form: X increases Y, X decreases Y?
 - What if there are multiple in a sentence?
+- What about X affects y?

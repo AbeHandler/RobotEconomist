@@ -2,6 +2,7 @@
 # coding: utf-8
 
 
+from random import shuffle
 import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
 import pandas as pd
@@ -62,7 +63,24 @@ def load_data(text_filename:str = "causal_text.csv",
 
     return df
 
-df = load_data()
+def load_training_data_revised(seeds_file="seeds.txt", filename="all_data.txt"):
+    '''shorter sentences are better?'''
+
+    all_ = load_text_file_as_list(filename)
+    all_ = [o for o in all_ if len(o.split(' ')) < 50]
+    shuffle(all_)
+
+    seeds = load_seeds(seeds_file)
+
+    yes = [o for o in all_ if any(i in o for i in seeds)][0:2000]
+    no = [o for o in all_ if not any(i in o for i in seeds)][0:2000]
+    out = [{"text": i, "labels": 1} for i in yes]
+    out = out + [{"text": i, "labels": 0} for i in no]
+    return yes, no, pd.DataFrame(out)
+
+#yesses = load_text_file_as_list("yes.txt")
+#nos = load_text_file_as_list("no.txt")
+yesses, nos, df = load_training_data_revised()
 
 #split into input and label data for training
 X = df.text
@@ -87,12 +105,9 @@ runtime["prob"] = LogReg.predict_proba(X_run)[:,1]
 runtime = runtime.sort_values("prob", ascending=False)
 runtime = runtime.to_dict(orient='records')
 
-yesses = load_text_file_as_list("yes.txt")
-nos = load_text_file_as_list("no.txt")
-
 # limiting to short sentences seems to really help a lot in annotating these
 # also the shorter sentences contain fewer anaphora and so are better in our setting
-runtime = [i for i in runtime if i["text"] not in yess and i["text"] not in nos and len(i["text"].split()) < 50]
+runtime = [i for i in runtime if i["text"] not in yesses and i["text"] not in nos and len(i["text"].split()) < 50]
 runtime = pd.DataFrame(runtime)
 runtime = runtime[0:100]
 runtime.to_csv("tmp.csv")
