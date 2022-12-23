@@ -6,7 +6,7 @@
 
 ## Processing s2orc
 
-- s2orc is processed in the data repo on Alpine. See `data/s2orc/process_full_dataset.slurm` for details. This gets data ready for the pipeline.
+- s2orc is processed in the data repo on Alpine. See `data/s2orc/process_full_dataset.slurm` for details. This gets data ready for the pipeline. The last line of the script will try to copy into RobotEconomist on `alpine/scratch`
 - The source of truth for s2orc on CURC is `/pl/active/abha4861/abha4861s2orc` and `process_full_dataset` starts by rsynching this to `/alpine/scratch`.
 
 ## Adding a new corpus
