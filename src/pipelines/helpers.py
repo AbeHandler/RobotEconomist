@@ -62,6 +62,8 @@ def jsonl_2_txt(
     id_field: str = "id",
     corpus: str = "s2orc_abstracts",
     data_directory: str = "data",  # almost always data, e.g. data/nber  # noqa: E501
+    debug_mode: bool = False,
+    debug_max: int = 100
 ) -> None:
     """
     In many cases raw papers are stored as jsonl. In this case,
@@ -82,7 +84,7 @@ def jsonl_2_txt(
 
     with open(papers_file.as_posix(), "r") as papers_file_handler:
         msg: str = "[*] Reading {}".format(papers_file.as_posix())
-        for line in tqdm(papers_file_handler, desc=msg):
+        for linenumber, line in tqdm(enumerate(papers_file_handler), desc=msg):
             one_paper_data: dict = json.loads(line)
             paper_id: str = one_paper_data[
                 id_field
@@ -99,6 +101,8 @@ def jsonl_2_txt(
             with open(output_path, "w") as of:
                 of.write(paper_text)
 
+            if linenumber > debug_max and debug_mode:
+                break
 
 def read_docs_from_disk(
     config: PipelineConfig,

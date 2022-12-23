@@ -38,7 +38,13 @@ class Pipeline(object):
 
         corpus = config.corpus
 
-        self._unpack_jsonl()
+        jsonl_to_text(papers_filename=config.docs_filename,
+                      text_field=config.docs_text_field,
+                      id_field=config.docs_id_field,
+                      corpus=config.corpus,
+                      config=config.debug_mode,
+                      debug_max=config.debug_max
+                      )
 
         # process corpus with spacy
         os.system(f"./scripts/process_corpus_locally_with_spacy.sh {corpus}")
@@ -74,13 +80,6 @@ class Pipeline(object):
         builder = SimilarityIndexBuilder(finder=finder, config=self.config)
         builder.build_index()
 
-    def _unpack_jsonl(self) -> None:
-        jsonl_2_txt(papers_filename=config.docs_filename,
-                    text_field=config.docs_text_field,
-                    id_field=config.docs_id_field,
-                    corpus=config.corpus,
-                    )
-
     def _index_phrases(self) -> None:
         factory = MatcherFactory(self.config.vocab)
         phrase_matcher: Matcher = factory.get_matcher(kind=MatchKind.np)
@@ -105,6 +104,7 @@ class Pipeline(object):
 
 if __name__ == "__main__":
     corpus: str = "s2orc"
-    config: PipelineConfig = PipelineConfig(corpus=corpus)
+    docs_text_field: "text"
+    config: PipelineConfig = PipelineConfig(corpus=corpus, docs_text_field=docs_text_field)
     pipeline: Pipeline = Pipeline(config)
     pipeline.run()

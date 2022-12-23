@@ -38,6 +38,10 @@ class PipelineConfig:
 
     bucket_name = "abha4861iv"
     bucket_url: str = "https://abha4861iv.s3.amazonaws.com/"
+    
+    # run the pipeline in debug mode?
+    debug_mode: bool = False
+    debug_max: int = 100
 
     def __post_init__(self) -> None:
         self.directories: List[str] = [
