@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-#SBATCH --partition=amilan-ucb
+#SBATCH --partition=amilan
 #SBATCH --job-name=initenv
 #SBATCH --output=initenv.out
 #SBATCH --time=24:00:00
