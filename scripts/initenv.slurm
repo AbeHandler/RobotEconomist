@@ -9,8 +9,6 @@
 
 # module load slurm/summit to access summit scheduler
 
-# setup => write subreddits to targets.txt, or other targets like author names
-
 module load gnu_parallel
 source /curc/sw/anaconda3/latest
 cd /scratch/alpine/abha4861/RobotEconomist
