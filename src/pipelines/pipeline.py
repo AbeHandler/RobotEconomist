@@ -104,8 +104,8 @@ class Pipeline(object):
 
 if __name__ == "__main__":
     corpus: str = "s2orc"
-    docs_text_field: "text"
-    config: PipelineConfig = PipelineConfig(corpus=corpus, 
+    docs_text_field = "text"
+    config: PipelineConfig = PipelineConfig(corpus=corpus,
                                             debug_mode=True,
                                             docs_text_field=docs_text_field)
     pipeline: Pipeline = Pipeline(config)
