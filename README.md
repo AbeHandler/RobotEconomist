@@ -25,8 +25,6 @@ There is an `config/econ.yml` file with all of the conda information in it
 
 #### Set up machine 
 
-`brew install git-lfs`
-
 `brew install jq`
 
 ## Repo tour 
