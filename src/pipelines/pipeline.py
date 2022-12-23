@@ -104,7 +104,7 @@ class Pipeline(object):
 
 
 if __name__ == "__main__":
-    corpus: str = "ivis"
+    corpus: str = "s2orc"
     config: PipelineConfig = PipelineConfig(corpus=corpus)
     pipeline: Pipeline = Pipeline(config)
     pipeline.run()
