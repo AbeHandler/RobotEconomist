@@ -16,3 +16,4 @@ conda env remove -n econ
 conda env create -f config/econ.yml
 conda activate econ
 python -m spacy download en_core_web_sm
+python -m spacy download en_core_web_md
