@@ -42,7 +42,7 @@ class Pipeline(object):
                     text_field=config.docs_text_field,
                     id_field=config.docs_id_field,
                     corpus=config.corpus,
-                    config=config.debug_mode,
+                    debug_mode=config.debug_mode,
                     debug_max=config.debug_max
                     )
 
