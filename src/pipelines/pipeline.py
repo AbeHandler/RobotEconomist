@@ -38,13 +38,13 @@ class Pipeline(object):
 
         corpus = config.corpus
 
-        jsonl_2_text(papers_filename=config.docs_filename,
-                     text_field=config.docs_text_field,
-                     id_field=config.docs_id_field,
-                     corpus=config.corpus,
-                     config=config.debug_mode,
-                     debug_max=config.debug_max
-                     )
+        jsonl_2_txt(papers_filename=config.docs_filename,
+                    text_field=config.docs_text_field,
+                    id_field=config.docs_id_field,
+                    corpus=config.corpus,
+                    config=config.debug_mode,
+                    debug_max=config.debug_max
+                    )
 
         # process corpus with spacy
         os.system(f"./scripts/process_corpus_locally_with_spacy.sh {corpus}")
