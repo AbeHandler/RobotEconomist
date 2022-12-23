@@ -38,7 +38,7 @@ class Pipeline(object):
 
         corpus = config.corpus
 
-        # self._unpack_jsonl()
+        self._unpack_jsonl()
 
         # process corpus with spacy
         os.system(f"./scripts/process_corpus_locally_with_spacy.sh {corpus}")

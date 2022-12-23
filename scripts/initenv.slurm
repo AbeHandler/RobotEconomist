@@ -14,4 +14,7 @@
 module load gnu_parallel
 source /curc/sw/anaconda3/latest
 cd /scratch/alpine/abha4861/RobotEconomist
-conda env create --file environment.yaml --name=nber
+conda env remove -n econ
+conda env create -f config/econ.yml
+conda activate econ
+python -m spacy download en_core_web_sm
