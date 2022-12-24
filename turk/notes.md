@@ -1,0 +1,2 @@
+- I looked at a quasi-random selection of keywords from management science papers
+- Some keywords are things being studied such as CEO pay and productivity. Other keywords are not, such as regression discontinuity design.
