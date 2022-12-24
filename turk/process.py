@@ -37,6 +37,6 @@ for ino, i in enumerate(sents):
 
 df = pd.DataFrame(sents)
 
-df = df.sample(frac = 1)
+df = df.sample(frac = 1, random_state=42)
 
 df[df["target"] == "productivity"].to_csv("productivity.csv", index=False)
