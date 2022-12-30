@@ -14,6 +14,14 @@ conda:
 condainit:
 	conda env create -f config/econ.yml
 
+.PHONE: frontendinit
+frontendinit:
+	cd webapp/frontend && npm install
+
+.PHONE: frontendtest
+frontendtest:
+	cd webapp/frontend && yarn test
+
 .PHONY: test
 test:
 	conda run -n econ --no-capture-output pytest test

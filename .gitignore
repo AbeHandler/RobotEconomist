@@ -1,3 +1,5 @@
+webapp/frontend/node_modules/*
+webapp/frontend/package-lock.json
 scrapers/*out
 scrapers/logs/*
 reports/*
