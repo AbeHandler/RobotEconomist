@@ -5,6 +5,8 @@ dependencies:
   - conda-forge::autopep8=1.7.0
   - conda-forge::build=0.7.0
   - conda-forge::flake8=5.0.4
+  - conda-forge::flask=2.2.2
+  - conda-forge::flask-bootstrap=3.3.7.1
   - pip
   - pip:
       - naveen==0.3.7

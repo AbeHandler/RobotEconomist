@@ -10,6 +10,10 @@ create_training_data :
 conda:
 	conda env update --file config/econ.yml --prune -n econ
 
+.PHONY: condainit
+condainit:
+	conda env create -f config/econ.yml
+
 .PHONY: test
 test:
 	conda run -n econ --no-capture-output pytest test
