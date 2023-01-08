@@ -11,9 +11,11 @@
 
 ## Adding a new corpus
 
-- Add `jsonl` file in `json` directory with list of dictionaries containing and ID and text OR write txt files into the `txt` directory, typically to `f"data/{corpus}/txt"` 
+- Add a `papers.jsonl` file in `json` directory (e.g. `data/nber_abstracts/json/papers.jsonl`). This file should have the form `{"id":1001,"text": ...}`. In the config object, for this example, set `docs_text_field` to `text` and `docs_id_field` to `id`
+- Set `debug_mode` to False and `clear_cache` to True
 - Create a `pipelines.pipeline_config` object w your settings; set the `corpus` parameter to your corpus
 - Run `python -m pipelines.pipeline`
+
 
 ## Set up
 

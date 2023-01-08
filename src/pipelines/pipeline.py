@@ -26,6 +26,14 @@ class Pipeline(object):
     def __init__(self, config: PipelineConfig) -> None:
         corpus: str = config.corpus
         self.config = config
+
+        if self.config.clear_cache:
+            # clear the tmp directories
+            os.system(f"rm -rf tmp/{config.corpus}")
+            # also clear the data/corpus/txt folder, which stores txt files
+            # if you clear the cache, remake this from the jsonl
+            os.system(f"find data/{config.corpus}/txt -type f | xargs rm")
+
         for step in config.directories:
             os.system(f"mkdir -p data/{corpus}/{step}")
 
@@ -103,10 +111,14 @@ class Pipeline(object):
 
 
 if __name__ == "__main__":
-    corpus: str = "s2orc"
-    docs_text_field = "text"
+    corpus: str = "nber_abstracts"
+    docs_text_field = "abstract"
+    docs_id_field = "nber_paper_id"
     config: PipelineConfig = PipelineConfig(corpus=corpus,
-                                            debug_mode=True,
+                                            debug_mode=False,
+                                            clear_cache=True,
+                                            debug_max=5,
+                                            docs_id_field=docs_id_field,
                                             docs_text_field=docs_text_field)
     pipeline: Pipeline = Pipeline(config)
     pipeline.run()

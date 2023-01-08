@@ -56,6 +56,15 @@ def init_helper(config: PipelineConfig) -> None:
     _reset_tmp_directory(config)
 
 
+def _validate_jsonl_file(papers_file: Path):
+
+    with open(papers_file.as_posix(), "r") as papers_file_handler:
+        for linenumber, line in enumerate(papers_file_handler):
+            if linenumber > 3:
+                break
+    if linenumber == 0:
+        raise ValueError(f"Expecting a jsonl file. {papers_file.as_posix()} has 0 lines. Did you pass a json file?")
+
 def jsonl_2_txt(
     papers_filename: str = "papers.jsonl",
     text_field: str = "paperAbstract",
@@ -63,7 +72,7 @@ def jsonl_2_txt(
     corpus: str = "s2orc_abstracts",
     data_directory: str = "data",  # almost always data, e.g. data/nber  # noqa: E501
     debug_mode: bool = False,
-    debug_max: int = 100
+    debug_max: int = 25
 ) -> None:
     """
     In many cases raw papers are stored as jsonl. In this case,
@@ -81,6 +90,8 @@ def jsonl_2_txt(
 
     text_directory: Path = Path(path_to_corpus, "txt")
     papers_file: Path = Path(path_to_corpus, "json", papers_filename)
+    _validate_jsonl_file(papers_file)
+
 
     with open(papers_file.as_posix(), "r") as papers_file_handler:
         msg: str = "[*] Reading {}".format(papers_file.as_posix())
@@ -102,6 +113,7 @@ def jsonl_2_txt(
                 of.write(paper_text)
 
             if linenumber > debug_max and debug_mode:
+                print(f'[*] Breaking early for debug mode at line {linenumber}')
                 break
 
 def read_docs_from_disk(

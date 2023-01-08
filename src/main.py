@@ -72,6 +72,7 @@ def controls() -> None:
         __name__, str(get_path_to_graph(library=library))
     )
 
+
     auditor = Auditor(graph_specification=path_to_graph)
 
     violations: List[
@@ -123,6 +124,7 @@ def iv() -> None:
     path_to_graph: str = resource_filename(
         __name__, str(get_path_to_graph(library=library))
     )
+
 
     try:
         _check_valid_library(Path(path_to_graph))

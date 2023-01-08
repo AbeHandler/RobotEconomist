@@ -9,6 +9,7 @@ from spacy.vocab import Vocab
 @dataclass
 class PipelineConfig:
     corpus: str
+    clear_cache: bool = True
     data_dir: str = "data"
     extractions_basename: str = "rulebased.extractions.jsonl"
     similarities_basename: str = "similarities.jsonl"
