@@ -2,7 +2,7 @@
 id: ifujhetbiuz44o790amuwy2
 title: Cumulus
 desc: ''
-updated: 1672875026787
+updated: 1673196666431
 created: 1672869663107
 ---
 
@@ -17,8 +17,8 @@ cd /tmp && curl https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64
 - Run anaconda and click yes
 - Run ssh-keygen to make ssh key and add to Github
 - sudo apt install make && make condainit
-- sudo ufw allow 80/tcp
 - sudo apt-get install iptables-persistent
+- sudo ufw allow 80/tcp
 - sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
 
 ### To get app to run
