@@ -59,10 +59,10 @@ class Pipeline(object):
 
         self._run_rule_based_extractions()
 
-        self._index_phrases()
-
-        # build an index of semantic similarities
-        self._index_similarities()
+        if config.use_semantic_similarities:
+            # build an index of semantic similarities
+            self._index_similarities()
+            self._index_phrases()
 
         # build a graph of the extractions
         converter = Extractions2NetworkXConverter(
@@ -117,6 +117,7 @@ if __name__ == "__main__":
     config: PipelineConfig = PipelineConfig(corpus=corpus,
                                             debug_mode=False,
                                             clear_cache=True,
+                                            use_semantic_similarities=False,
                                             debug_max=5,
                                             docs_id_field=docs_id_field,
                                             docs_text_field=docs_text_field)
